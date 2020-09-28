@@ -651,7 +651,7 @@ if [ $VM_CON0 = "xterm" -a "$CON0_PORTHELPER" != "yes" ]; then
    case "$TERM_TYPE" in
       konsole)       KERNELCMD="konsole --nofork --title $VM_NAME -e $KERNELCMD";;
       konsole-tab)   KERNELCMD="$NETKIT_HOME/bin/konsole-tabs.sh -e $KERNELCMD";;
-      gnome)         KERNELCMD="gnome-terminal --disable-factory -x $KERNELCMD";;
+      gnome)         KERNELCMD="gnome-terminal --window-with-profile=netkit -- $KERNELCMD";;
       *)             KERNELCMD="xterm -e $KERNELCMD";;
    esac
    VM_CON0="this_noporthelper"
