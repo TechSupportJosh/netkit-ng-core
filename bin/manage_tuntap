@@ -76,7 +76,7 @@ case $ACTION in
       if which iptables > /dev/null 2>&1; then
          if ! iptables -n -t nat -L POSTROUTING | grep -q "MASQUERADE"; then
             echo -n "Enabling masquerading...\t\t"
-            iptables -t nat -A POSTROUTING -j MASQUERADE && echo "done." || exit 1
+            iptables -t nat -A POSTROUTING ! -o lo -j MASQUERADE && echo "done." || exit 1
          fi
          if ! iptables -n -vL FORWARD | grep -q "ACCEPT.*nk_tap_\+"; then
             echo -n "Opening firewall for tunnel...\t\t"
@@ -93,7 +93,7 @@ case $ACTION in
          fi
          if iptables -n -t nat -L POSTROUTING | grep -q "MASQUERADE"; then
             echo -n "Disabling masquerading...\t\t\t"
-            iptables -t nat -D POSTROUTING -j MASQUERADE && echo "done." || exit 1
+            iptables -t nat -D POSTROUTING ! -o lo -j MASQUERADE && echo "done." || exit 1
          fi
       fi
       
