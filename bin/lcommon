@@ -116,7 +116,7 @@ labWelcome() {
 
 
 # This function prints a message and attempts to remove a file passed as argument
-removeLabFile() {
+removeLabFolder() {
    if [ -e "$1" ]; then
       rm -f "$1" > /dev/null 2>&1
       [ ! -z "$VERBOSE" ] && echo "   Removed:   `basename $1`"
@@ -125,6 +125,15 @@ removeLabFile() {
    fi
 }
 
+# This function prints a message and attempts to remove a folder passed as argument
+removeLabFile() {
+   if [ -e "$1" ]; then
+      rm -rf "$1" > /dev/null 2>&1
+      [ ! -z "$VERBOSE" ] && echo "   Removed:   `basename $1`"
+   else
+      [ ! -z "$VERBOSE" ] && echo "   Not found: `basename $1`"
+   fi
+}
 
 # This function removes temporary files inside the lab directory
 labClean() {
@@ -135,6 +144,7 @@ labClean() {
    for VM in $VHOSTLIST; do
       # Remove files from the lab directory. Note that dash does
       # not support brace expansion
+      removeLabFolder ${MCONSOLE_DIR}/${VM}
       removeLabFile ${LAB_DIRECTORY}/${VM}.ready
       removeLabFile ${LAB_DIRECTORY}/${VM}.disk
       removeLabFile ${LAB_DIRECTORY}/${VM}.log
