@@ -118,7 +118,7 @@ labWelcome() {
 # This function prints a message and attempts to remove a file passed as argument
 removeLabFolder() {
    if [ -e "$1" ]; then
-      rm -f "$1" > /dev/null 2>&1
+      rm -rf "$1" > /dev/null 2>&1
       [ ! -z "$VERBOSE" ] && echo "   Removed:   `basename $1`"
    else
       [ ! -z "$VERBOSE" ] && echo "   Not found: `basename $1`"
@@ -128,7 +128,7 @@ removeLabFolder() {
 # This function prints a message and attempts to remove a folder passed as argument
 removeLabFile() {
    if [ -e "$1" ]; then
-      rm -rf "$1" > /dev/null 2>&1
+      rm -f "$1" > /dev/null 2>&1
       [ ! -z "$VERBOSE" ] && echo "   Removed:   `basename $1`"
    else
       [ ! -z "$VERBOSE" ] && echo "   Not found: `basename $1`"
