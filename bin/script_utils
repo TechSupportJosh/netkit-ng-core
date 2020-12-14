@@ -137,7 +137,7 @@ showVersion() {
    
    # Netkit version information
    echo -n "Netkit version:            "
-   NETKIT_VERSION=`cat "$NETKIT_HOME/netkit-version" 2>&1 | grep "Netkit version" `
+   NETKIT_VERSION=`cat "$NETKIT_HOME/netkit-version" 2>&1 | grep "Netkit-NG version" `
    if [ $? = 0 ]; then
       NETKIT_VERSION="${NETKIT_VERSION##Netkit version }"
       if echo "$NETKIT_VERSION" | grep -Eq "([0-9]+[\.\-])+[0-9]+[a-zA-Z]*$"; then
@@ -157,13 +157,7 @@ showVersion() {
    [ -L "$VM_KERNEL" ] && { KERNEL_FILE_NAME=`readlink "$VM_KERNEL"`;
                             KERNEL_FILE_NAME=`basename "$KERNEL_FILE_NAME"`; }
    NETKIT_KERNEL_VERSION="${KERNEL_FILE_NAME##netkit-kernel-}"
-   if echo "$NETKIT_KERNEL_VERSION" | grep -Eq "([0-9]+[\.\-])+[0-9]+(_(rc)?[0-9])?\-K([0-9]+[\.\-])+[0-9]+[a-zA-Z]*$"; then
-      # This appears to be a valid version number
-      KERNEL_RELEASE=`echo $NETKIT_KERNEL_VERSION | cut -d - -f 2`
-      echo "${NETKIT_KERNEL_VERSION##*-} (${KERNEL_RELEASE}) [${NETKIT_KERNEL_VERSION%%-*}]"
-   else
-      echo "<unknown>"
-   fi
+   echo $NETKIT_KERNEL_VERSION
    
    # Netkit filesystem version information
    echo -n "Netkit filesystem version: "
