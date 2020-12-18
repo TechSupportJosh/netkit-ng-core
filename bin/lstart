@@ -349,6 +349,8 @@ fi
 [ -z "$TESTMODE" ] && becho "======================== Starting lab ==========================="
 [ ! -z "$TESTMODE" -a -z "$SCRIPTMODE" ] && becho "======================== Testing lab ============================"
 [ -z "$SCRIPTMODE" ] && labWelcome
+[ -z "$SCRIPTMODE" ] && echo
+[ -z "$SCRIPTMODE" ] && becho "Having issues starting the lab? Run 'lclean' before running 'lstart'."
 [ -z "$SCRIPTMODE" ] && becho "================================================================="
 
 
